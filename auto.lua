@@ -1,4 +1,26 @@
--- reactor-control.lua
+local function manual_control()
+    while true do
+        print("Manual Control: Enter command (set rods, set load, set pitch, exit):")
+        local command = io.read()
+
+        if command == "exit" then
+            break
+        elseif command:match("set rods (%d+)") then
+            local rods = tonumber(command:match("set rods (%d+)"))
+            reactor:setControlRods(math.clamp(rods, 0, 100))
+        elseif command:match("set load (%d+)") then
+            local load = tonumber(command:match("set load (%d+)"))
+            reactor:setGeneratorLoad(math.clamp(load, 0, 100))
+        elseif command:match("set pitch (%d+)") then
+            local pitch = tonumber(command:match("set pitch (%d+)"))
+            reactor:setTurbinePitch(math.clamp(pitch, 0, 100))
+        else
+            print("Invalid command. Please try again.")
+        end
+    end
+end
+
+manual_control()
 local rbmk = require("rbmk")
 local reactor = rbmk.create()
 
