@@ -1,6 +1,6 @@
 local rbmk = require("rbmk")
 local reactor = rbmk.create()
-local monitor = peripheral.wrap("monitor_0") -- Adjust the monitor name as needed
+local monitor = peripheral.find("monitor") -- Adjust the monitor name as needed
 
 -- Function to print reactor status to the monitor
 local function update_monitor()
